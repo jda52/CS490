@@ -12,13 +12,13 @@
         {
             if ($user == $row['Username'] and password_verify($password, $row['Password']))
             {
-                echo $row['Status']. '<br>';
+                echo $row['Status'];
                 $success = True;
             }
         }
         if ($success == False)
         {
-            echo 'Incorrect <br>';
+            echo 'Incorrect';
         }
     }
 
@@ -40,10 +40,9 @@
     $com = "SELECT * FROM Login";
     $result = $mycnx->query($com);
 
-    $use = 'Mka84';
-    $test = 'Hl)(347^*%';
-    checkPassword($result, $use, $test);
-    print $name  . $pass;
-    echo $name . "<br>" . $pass;
+    #$use = 'Jas672';
+    #$test = 'N3*021F^*';
+    #hashPassword('N3*021F^*');
+    checkPassword($result, $name, $pass);
     $mycnx->close();
 ?>
