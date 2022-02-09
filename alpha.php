@@ -7,19 +7,16 @@
     
     function checkPassword($result, $user, $password)
     {
-        $success = False;
+        $status = 'invalid';
         while($row = $result->fetch_assoc())
         {
             if ($user == $row['Username'] and password_verify($password, $row['Password']))
             {
-                echo $row['Status'];
+                $status = $row['Status'];
                 $success = True;
             }
         }
-        if ($success == False)
-        {
-            echo 'Incorrect';
-        }
+        return $status;
     }
 
     $str_json = file_get_contents("php://input"); 
@@ -43,6 +40,9 @@
     #$use = 'Jas672';
     #$test = 'N3*021F^*';
     #hashPassword('N3*021F^*');
-    checkPassword($result, $name, $pass);
+    $stat = checkPassword($result, $name, $pass);
+    $response = array('role' => $stat);
+    $json_res = json_encode($response);
+    echo $json_res;
     $mycnx->close();
 ?>
