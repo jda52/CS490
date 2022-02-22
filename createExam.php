@@ -4,16 +4,13 @@
     $str_json = file_get_contents("php://input"); 
     $response = json_decode($str_json, true);
 
-    $topic = "";
-    $quest = "";
-    $input1 = "";
-    $output1 = "";
-    $input2 = "";
-    $output2 = "";
-    $diff = "";
+    $rowQue = "SELECT * FROM Exam_Questions_Map";
+    $rows = mysql_num_rows($rowQue);
     
+    $teacher = "";
+    $exID = $rows + 1;
+    $query = "INSERT INTO Exam_Questions_Map (Instructor,ExamID) VALUES ($teacher,$exID)";
 
-    $query = "INSERT INTO Question_Bank (Topic, Question, Input1, Output1, Input2, Output2, Difficulty) VALUES ($type, $quest, $input1, $output1, $input2, $output2, $diff)";
     $add = $mycnx->query($query);
     if (!$add)
     {
@@ -23,5 +20,4 @@
     {
         echo 'Question added';
     }
-    
 ?>
