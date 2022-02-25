@@ -10,8 +10,9 @@
     $arr = [];
     while($row = $result->fetch_assoc())
     {
-        $arr[] = array('quest'=> $row['Question'], 'QID' => $row['QID'], 'topic' => $row['topic']);
+        $arr[] = array('Question'=> $row['Question'], 'QID' => $row['QID']);
     }
-    $json_res = json_encode($response);
+    $json_res = json_encode($arr);
     echo $json_res;
+    $mycnx->close();
 ?>

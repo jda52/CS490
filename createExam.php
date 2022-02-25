@@ -3,21 +3,21 @@
 
     $str_json = file_get_contents("php://input"); 
     $response = json_decode($str_json, true);
-
-    $rowQue = "SELECT * FROM Exam_Questions_Map";
-    $rows = mysql_num_rows($rowQue);
     
-    $teacher = "";
-    $exID = $rows + 1;
-    $query = "INSERT INTO Exam_Questions_Map (Instructor,ExamID) VALUES ($teacher,$exID)";
+    if(isset($response['Instructor'])) $instructor = $response['Instructor'];
+
+    $query = "INSERT INTO Exam_Questions_Map (Instructor) VALUES ($instructor)";
 
     $add = $mycnx->query($query);
     if (!$add)
     {
-        echo "Error " . $query . "<br>" . $conn->error;
+        $response = array('response' => "Error " . $query . "<br>" . $conn->error);
     }
     else
     {
-        echo 'Question added';
+        $response = array('response' => 'Exam Created');
     }
+    $json_res = json_encode($response);
+    echo $json_res;
+    $mycnx->close();
 ?>
