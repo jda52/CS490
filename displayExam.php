@@ -4,10 +4,11 @@
     $str_json = file_get_contents("php://input"); 
     $response = json_decode($str_json, true);
 
-    if(isset($response['ExamID'])) $exID = $response['ExamID'];
-    $query1 = 'SELECT * FROM Exam_Questions_Map WHERE ExamID = $exID';
-
-    $result1 = $mycnx->query($query1);
+    #if(isset($response['ExamID'])) $exID = $response['ExamID'];
+    $exID = '1';
+    $query1 = "SELECT * FROM Exam_Questions_Map WHERE ExamID = $exID";
+    $result1 = $mycnx->query($query1) or die($conn->error);
+    
     $arrRes = array();
     while($row = $result1->fetch_assoc())
     {
