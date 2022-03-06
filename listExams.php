@@ -10,7 +10,7 @@
     $arr = [];
     while($row = $result->fetch_assoc())
     {
-        $arr[] = array('ExamID'=> $row['ExamID'], 'Name' => $row['Name']);
+        $arr[] = array('ExamID'=> $row['ExamID'], 'Name' => $row['Name'], 'ExamName' => $row['Exam_Name']);
     }
     $json_res = json_encode($arr);
     echo $json_res;
