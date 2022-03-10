@@ -1,8 +1,11 @@
 <?php
     include "dbcnx.php";
 
-    if(isset($response['Username'])) $user = $response['Username'];
-    if(isset($response['ExamID'])) $exam = $response['ExamID'];
+    $str_json = file_get_contents("php://input"); 
+    $response = json_decode($str_json, true);
+    
+    if(isset($response['user_id'])) $user = "'".$response['user_id']."'";
+    if(isset($response['exam_id'])) $exam = intval($response['exam_id']);
     if(isset($response['results'])) $results = $response['results'];
     
     $indices = count($results);
@@ -11,17 +14,20 @@
     for ($x = 0; $x < $indices; $x++)
     {
         $iteration = $results[$x];
-        $qid = $iteration['question_id'];
+        $qid = intval($iteration['question_id']);
         $score = $iteration['score'];
-        $funcScore = intval($score['correct_function_name']);
-        $tc1Score = intval($score['testcase_1']);
-        $tc2Score = intval($score['testcase_2']);
+        $comment = "'".$score['comments']."'";
+        $funcScore = floatval($score['correct_function_name']);
+        $tc1Score = floatval($score['testcase_1']);
+        $tc2Score = floatval($score['testcase_2']);
         $totalScore = $funcScore + $tc1Score + $tc2Score;
-        $query = "UPDATE Student_Results SET Fuction_Score = $funcScore, TC1_Score = $tc1Score, TC2_Score = $tc2Score, Score = $totalScore, Comments = $comment WHERE Username = $user, ExamID = $exam, QID = $qid";
+        $query = "UPDATE Student_Results SET Function_Score= $funcScore, TC1_Score= $tc1Score, TC2_Score= $tc2Score, Score= $totalScore, Comments = $comment WHERE Username= $user AND ExamID= $exam AND QID= $qid";
         
         $update = $mycnx->query($query);
         if (!$update)
         {
+            echo mysqli_error($mycnx);
+            $status = !$status;
             break;
         }
     }
@@ -34,4 +40,5 @@
         $response = array('response' => 'Student result updated');
     }
     echo json_encode($response);
+    $mycnx->close();
 ?>

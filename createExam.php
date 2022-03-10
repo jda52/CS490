@@ -1,16 +1,14 @@
 <?php
     include "dbcnx.php";
 
-    #var_dump(file_get_contents("php://input"));
+    #$str_json = '{"query":"insert_exam","examName":"Harder Test","questions":[{"qid":"14","points":"25"},{"qid":"15","points":"25"}]}';
     $str_json = file_get_contents("php://input"); 
     $response = json_decode($str_json, true);
     if(isset($response['examName'])) $exam = "'".$response['examName']."'";
     if(isset($response['questions'])) $questions = $response['questions'];
-    #if(isset($response['qid'])) $qid = $response['qid'];
-    #if(isset($response['points'])) $points = $response['points'];
+
     $indices = count($questions);
     $query1 = "INSERT INTO Exam_Bank (Exam_Name) VALUES ($exam)";
-
     $add = $mycnx->query($query1);
     if (!$add)
     {
@@ -20,6 +18,7 @@
     $query2 = "SELECT MAX(ExamID) FROM Exam_Bank";
     $result = $mycnx->query($query2);
     $row = mysqli_fetch_array($result);
+    
     $status = true;
     for ($x = 0; $x < $indices; $x++)
     {
@@ -30,6 +29,7 @@
         $add = $mycnx->query($query3);
         if (!$add)
         {
+            $status = !$status;
             break;
         }
     }
