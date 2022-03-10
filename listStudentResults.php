@@ -18,7 +18,7 @@
     {
         if ($row['Username'] == $user AND  $row['ExamID'] == $exam)
         {   
-          $arr[] =  array('question_id' => $row['QID'], 'question' => $row['Question'], 'student_answer' => $row['Answer'], 'Func_Score'  => $row['Function_Score'], 'TC1' => $row['TC1_Score'], 'TC2' => $row['TC2_Score'], 'testcases' => $row['TestCase'], 'points' => $row['Points'], 'comments'=> $row['Comments']);
+          $arr[] =  array('question_id' => $row['QID'], 'question' => $row['Question'], 'student_answer' => $row['Answer'], 'Func_Score'  => $row['Function_Score'], 'TC1' => $row['TC1_Score'], 'TC2' => $row['TC2_Score'], 'testcases' => $row['TestCase'], 'points' => $row['Points'], 'comments'=> $row['Comments'], 'Student_output1' => $row['Output1'], 'Student_output2' => $row['Output2']);
         }
     }
     echo json_encode($arr);
