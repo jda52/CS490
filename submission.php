@@ -10,8 +10,6 @@
     
     
     $indices = count($questions);
-    #$query1 = "INSERT INTO Student_Exams (Username, ExamID, Exam_Name) VALUES ($user, $exam, $examName)";
-    #$add = $mycnx->query($query1);
     $status = true;
     for ($x = 0; $x < $indices; $x++)
     {
@@ -19,7 +17,6 @@
         $iteration = $questions[$x];
         $QID = $iteration['question_id'];
         $answer = "'".$iteration['answer']."'";
-        #query3 = "INSERT INTO Exam_Questions_Map (ExamID, QID, Points) VALUES ($row[0], $qid, $points)";
         $query = "INSERT INTO Student_Results (Username, ExamID, QID, Answer) VALUES ($user, $exam, $QID, $answer)";
         $add = $mycnx->query($query);
         if (!$add)
