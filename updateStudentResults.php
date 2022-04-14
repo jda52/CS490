@@ -17,14 +17,13 @@
         $iteration = $results[$x];
         $qid = intval($iteration['question_id']);
         $score = $iteration['score'];
-        $output1 = "'".$score['student_out_1']."'";
-        $output2 = "'".$score['student_out_2']."'";
+        $output = "'".$score['student_out']."'";
+        $tcScores = "'".$score['points_earned']."'";
         $comment = "'".$score['comments']."'";
         $funcScore = floatval($score['correct_function_name']);
-        $tc1Score = floatval($score['testcase_1']);
-        $tc2Score = floatval($score['testcase_2']);
-        $totalScore = $funcScore + $tc1Score + $tc2Score;
-        $query = "UPDATE Student_Results SET Function_Score= $funcScore, TC1_Score= $tc1Score, TC2_Score= $tc2Score, Score= $totalScore, Output1 = $output1, Output2 = $output2, Comments = $comment WHERE Username= $user AND ExamID= $exam AND QID= $qid";
+        $constScore = floatval($score['constraint_check']);
+        $totalScore = floatval($score['total_points']);
+        $query = "UPDATE Student_Results SET Function_Score= $funcScore, TC_Scores= $tcScores, Constraint_Score = $constScore, Score= $totalScore, Output = $output, Comments = $comment WHERE Username= $user AND ExamID= $exam AND QID= $qid";
         
         
         $update = $mycnx->query($query);
