@@ -1,12 +1,12 @@
 <?php
     include "dbcnx.php";
 
-    #$str_json = '{"query":"insert_exam","examName":"Harder Test","questions":[{"qid":"14","points":"25"},{"qid":"15","points":"25"}]}';
+    #$str_json = '{"query":"insert_exam","questions":[{"qid":"57","points":"10"},{"qid":"58","points":"10"}],"examName":"FinalExam"}';
     $str_json = file_get_contents("php://input"); 
     $response = json_decode($str_json, true);
-    if(isset($response['examName'])) $exam = "'".$response['examName']."'";
     if(isset($response['questions'])) $questions = $response['questions'];
-
+    if(isset($response['examName'])) $exam = "'".$response['examName']."'";
+    
     $indices = count($questions);
     $query1 = "INSERT INTO Exam_Bank (Exam_Name) VALUES ($exam)";
     $add = $mycnx->query($query1);
