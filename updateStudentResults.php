@@ -23,7 +23,8 @@
         $funcScore = floatval($score['correct_function_name']);
         $constScore = floatval($score['constraint_check']);
         $totalScore = floatval($score['total_points']);
-        $query = "UPDATE Student_Results SET Function_Score= $funcScore, TC_Scores= $tcScores, Constraint_Score = $constScore, Score= $totalScore, Output = $output, Comments = $comment WHERE Username= $user AND ExamID= $exam AND QID= $qid";
+        $call = "'".$score["function_call"]."'";
+        $query = "UPDATE Student_Results SET Function_Score= $funcScore, TC_Scores= $tcScores, Constraint_Score = $constScore, Score= $totalScore, Output = $output, Comments = $comment, Func_Call = $call WHERE Username= $user AND ExamID= $exam AND QID= $qid";
         
         
         $update = $mycnx->query($query);

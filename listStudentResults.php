@@ -19,7 +19,7 @@
     {
         if ($row['Username'] == $user AND  $row['ExamID'] == $exam)
         {   
-          $arr[] =  array('question_id' => $row['QID'], 'question' => $row['Question'], 'student_answer' => $row['Answer'], 'Func_Score'  => $row['Function_Score'], 'TC_Results' => $row['TC_Scores'], 'Constraint_Score' => $row['Constraint_Score'], 'testcases' => $row['TestCase'], 'points' => $row['Points'], 'comments'=> $row['Comments'], 'Output' => $row['Output'], 'constraint' => $row['Const'], 'tc_num' => $row['TestCase_Count'], 'Score' => $row['Score']);
+          $arr[] =  array('question_id' => $row['QID'], 'question' => $row['Question'], 'student_answer' => $row['Answer'], 'Func_Score'  => $row['Function_Score'], 'TC_Results' => $row['TC_Scores'], 'Constraint_Score' => $row['Constraint_Score'], 'testcases' => $row['TestCase'], 'points' => $row['Points'], 'comments'=> $row['Comments'], 'Output' => $row['Output'], 'constraint' => $row['Const'], 'tc_num' => $row['TestCase_Count'], 'Score' => $row['Score'], 'Call' => $row['Func_Call']);
         }
     }
     echo json_encode($arr);
